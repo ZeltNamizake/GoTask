@@ -70,9 +70,21 @@ Select:
    [INFO] - Task has been undone
    ```
  - Delete a task:
-   ```
+   ```plaintext
    Task Number Delete: 1
    [INFO] - Task has been deleted
+   ```
+ - Display task list by date:
+   ```plaintext
+   Date (YYYY-MM-DD): 2026-04-08
+
+   Tasks [2026-04-08]
+   Number of tasks: 3
+   1. ✅️ – Learning
+   2. ✅️ – Reading
+   3. ✅️ – Workout
+
+   [INFO] - Press enter to continue...
    ```
 
 ## Notes
