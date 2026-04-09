@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path"
 )
 
 func InitStorage() error {
@@ -126,6 +127,40 @@ func DeleteTask(index int) error {
 	tasks = append(tasks[:index-1], tasks[index:]...)
 
 	return SaveTasks(tasks)
+}
+
+func ListTasksByDate(date string) error {
+	filePath := path.Join(dir, fmt.Sprintf("tasks_%s.json", date))
+
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			ClearScreen()
+			fmt.Printf("[INFO] - No tasks found for this date")
+			return nil
+		}
+		return err
+	}
+
+	var tasks []Task
+	if len(data) > 0 {
+		if err := json.Unmarshal(data, &tasks); err != nil {
+			return err
+		}
+	}
+
+	ClearScreen()
+	fmt.Printf("Tasks [%s]\n", date)
+	fmt.Println("Number of tasks:", len(tasks))
+	for i, t := range tasks {
+		status := "❌️"
+		if t.Done {
+			status = "✅️"
+		}
+		fmt.Printf("%d. %s - %s\n", i+1, status, t.Title)
+	}
+	return nil
+
 }
 
 func ListTasks() error {

@@ -17,7 +17,8 @@ func main() {
 2. Done Task
 3. Undone Task
 4. Delete Task
-5. Exit
+5. Show Tasks by Date
+6. Exit
 Select: `
 
 	for {
@@ -65,6 +66,15 @@ Select: `
 			}
 
 		case "5":
+			date := handler.AskRequired("Date (YYYY-MM-DD): ")
+
+			if err := handler.ListTasksByDate(date); err != nil {
+				fmt.Println("[ERR] - ListTasksByDate:", err)
+			} else {
+				handler.Ask("\n[INFO] - Press enter to continue...")
+			}
+
+		case "6":
 			fmt.Println("Bye!")
 			return
 
