@@ -8,6 +8,7 @@ Designed for **managing daily tasks** quickly and efficiently, using **JSON-base
 - Mark tasks as done (`Done Task`)  
 - Mark tasks as not done (`Undone Task`)  
 - Delete tasks (`Delete Task`)  
+- Display tasks for a specific date (`ListTasksByDate`)  
 - Automatically display all tasks  
 - Stores tasks by date (`taskFile/tasks_<date>.json`)  
 - Interactive terminal interface  
