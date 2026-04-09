@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path"
 	"strconv"
 	"strings"
 	"time"
@@ -19,7 +20,7 @@ func DateNow() string {
 }
 
 func GetPath() string {
-	return fmt.Sprintf("%s/tasks_%s.json", dir, DateNow())
+	return path.Join(dir, fmt.Sprintf("tasks_%s.json", DateNow()))
 }
 
 func Ask(text string) string {
