@@ -72,7 +72,7 @@ Select: `
 			if err := handler.UndoneTask(index); err != nil {
 				fmt.Println("[ERR] - UndoneTask:", err)
 			} else {
-				fmt.Println("[INFO] - Task has been undone")
+				fmt.Println("[INFO] - Task has been undone ⬜️")
 			}
 
 		case "4":
@@ -85,11 +85,11 @@ Select: `
 			if err := handler.DeleteTask(index); err != nil {
 				fmt.Println("[ERR] - DeleteTask:", err)
 			} else {
-				fmt.Println("[INFO] - Task has been deleted")
+				fmt.Println("[INFO] - Task has been deleted ❌️")
 			}
 
 		case "5":
-			index, ok := handler.AskIntRequired("Task Number Markdone: ")
+			index, ok := handler.AskIntRequired("Task Number: ")
 			if !ok {
 				fmt.Println("[INFO] - Cancelled")
 				continue
@@ -110,7 +110,7 @@ Select: `
 			if err := handler.EditDoneTime(index, time); err != nil {
 				fmt.Println("[ERR] - EditDoneTime:", err)
 			} else {
-				fmt.Println("[INFO] - Done time update:", time)
+				fmt.Println("[INFO] - Done time updated:", time, "✅️")
 			}
 
 		case "6":
