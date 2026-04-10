@@ -32,6 +32,7 @@ GoTask/
 │   ├── view.go          # UI rendering (task display)
 │   └── task.go          # Task struct
 └── taskFile/            # JSON storage (auto-generated)
+```
 
 ---
 
