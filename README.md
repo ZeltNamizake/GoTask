@@ -9,6 +9,9 @@ Designed for **managing daily tasks** quickly and efficiently, using **JSON-base
 - Mark tasks as not done (`Undone Task`)  
 - Delete tasks (`Delete Task`)  
 - Display tasks for a specific date (`ListTasksByDate`)  
+- Edit time on completed tasks (`EditDoneTime`)  
+- In input fields → cancel current action  
+- In main menu → exit application  
 - Automatically display all tasks  
 - Stores tasks by date (`taskFile/tasks_<date>.json`)  
 - Interactive terminal interface  
@@ -20,8 +23,9 @@ GoTask/
 ├── main.go             # CLI entry point
 ├── go.mod
 ├── handler/
-│   ├── service.go      # CRUD tasks & ListTasks
+│   ├── service.go      # CRUD LoadTask, InitStorage, etc
 │   └── util.go         # Helpers: input, clear screen, date
+|   └── view.go         # View: List task
 └── taskFile/           # Folder for storing JSON task files
 ```
 
@@ -49,7 +53,9 @@ go run main.go
 2. Done Task
 3. Undone Task
 4. Delete Task
-5. Exit
+5. Edit Done Time
+6. Show Tasks by Date
+0. Back/Exit
 Select:
 ```
 
@@ -74,15 +80,23 @@ Select:
    Task Number Delete: 1
    [INFO] - Task has been deleted
    ```
+
+ - Time editing on completed tasks:
+   ```plaintext
+   Task Number Markdone: 1
+   New Done Time (HH:MM): 08:00
+   [INFO] - Done time update: 08:00
+   ```
+
  - Display task list by date:
    ```plaintext
    Date (YYYY-MM-DD): 2026-04-08
 
    Tasks [2026-04-08]
    Number of tasks: 3
-   1. ✅️ – Learning
-   2. ✅️ – Reading
-   3. ✅️ – Workout
+   1. ✅️ – Learning (08.00) 
+   2. ✅️ – Reading (06.00)
+   3. ⬜️ – Workout
 
    [INFO] - Press enter to continue...
    ```
