@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 )
 
 func InitStorage() error {
@@ -93,6 +92,8 @@ func DoneTask(index int) error {
 	}
 
 	tasks[index-1].Done = true
+	tasks[index-1].DoneAt = TimeNow()
+
 	return SaveTasks(tasks)
 }
 
@@ -111,6 +112,8 @@ func UndoneTask(index int) error {
 	}
 
 	tasks[index-1].Done = false
+	tasks[index-1].DoneAt = ""
+
 	return SaveTasks(tasks)
 }
 
@@ -129,53 +132,21 @@ func DeleteTask(index int) error {
 	return SaveTasks(tasks)
 }
 
-func ListTasksByDate(date string) error {
-	filePath := path.Join(dir, fmt.Sprintf("tasks_%s.json", date))
-
-	data, err := os.ReadFile(filePath)
-	if err != nil {
-		if os.IsNotExist(err) {
-			ClearScreen()
-			fmt.Printf("[INFO] - No tasks found for this date")
-			return nil
-		}
-		return err
-	}
-
-	var tasks []Task
-	if len(data) > 0 {
-		if err := json.Unmarshal(data, &tasks); err != nil {
-			return err
-		}
-	}
-
-	ClearScreen()
-	fmt.Printf("Tasks [%s]\n", date)
-	fmt.Println("Number of tasks:", len(tasks))
-	for i, t := range tasks {
-		status := "❌️"
-		if t.Done {
-			status = "✅️"
-		}
-		fmt.Printf("%d. %s - %s\n", i+1, status, t.Title)
-	}
-	return nil
-
-}
-
-func ListTasks() error {
+func EditDoneTime(index int, newTime string) error {
 	tasks, err := LoadTasks()
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Tasks [%s]\n", DateNow())
-	fmt.Println("Number of tasks:", len(tasks))
-	for i, t := range tasks {
-		status := "❌️"
-		if t.Done {
-			status = "✅️"
-		}
-		fmt.Printf("%d. %s – %s\n", i+1, status, t.Title)
+
+	if index < 1 || index > len(tasks) {
+		return fmt.Errorf("Invalid index")
 	}
-	return nil
+
+	if !tasks[index-1].Done {
+		return fmt.Errorf("Task is not marked as done yet")
+	}
+
+	tasks[index-1].DoneAt = newTime
+
+	return SaveTasks(tasks)
 }
