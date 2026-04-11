@@ -41,6 +41,7 @@ func ListTasksByDate(date string) error {
 		}
 		fmt.Printf("%d. %s - %s%s\n", i+1, status, t.Title, timeInfo)
 	}
+	ShowScore()
 	return nil
 
 }
@@ -63,5 +64,17 @@ func ListTasks() error {
 		}
 		fmt.Printf("%d. %s – %s%s\n", i+1, status, t.Title, timeInfo)
 	}
+	ShowScore()
 	return nil
+}
+
+func ShowScore() {
+	done, total := GetScore()
+
+	percent := 0
+	if total > 0 {
+		percent = (done * 100) / total
+	}
+	fmt.Printf("\nProgress: %d%%\n", percent)
+	fmt.Printf("Completed Task: %d / %d\n", done, total)
 }

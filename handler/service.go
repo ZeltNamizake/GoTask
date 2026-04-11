@@ -150,3 +150,21 @@ func EditDoneTime(index int, newTime string) error {
 
 	return SaveTasks(tasks)
 }
+
+func GetScore() (int, int) {
+	tasks, err := LoadTasks()
+	if err != nil {
+		return 0, 0
+	}
+
+	total := len(tasks)
+	done := 0
+
+	for _, t := range tasks {
+		if t.Done {
+			done++
+		}
+	}
+
+	return done, total
+}
