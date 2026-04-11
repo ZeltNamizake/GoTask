@@ -13,6 +13,7 @@ Designed for managing daily tasks quickly and efficiently using JSON-based stora
 - Delete tasks (`Delete Task`)
 - Edit done time on completed tasks (`Edit Done Time`)
 - Show tasks by specific date (`ListTasksByDate`)
+- Display task completion score (Done / Total + Progress %)  
 - Automatically display all tasks on startup
 - Store tasks per day (`taskFile/tasks_YYYY-MM-DD.json`)
 - Interactive terminal-based interface
@@ -106,6 +107,9 @@ Select:
    1. ✅️ – Learning (07:00) 
    2. ✅️ – Reading (06:00)
    3. ⬜️ – Workout
+
+   Progress: 66%
+   Completed Task: 2 / 3
 
    [INFO] - Press enter to continue...
    ```
