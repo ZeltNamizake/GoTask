@@ -2,12 +2,9 @@ package handler
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	"os"
-	"os/exec"
-	"path"
-	"runtime"
+	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -16,22 +13,8 @@ import (
 
 const dir = "taskFile"
 
-func DateNow() string {
-	dateNow := time.Now().Format("2006-01-02")
-	return dateNow
-}
-
-func TimeNow() string {
-	if runtime.GOOS == "android" {
-		out, _ := exec.Command("date", "+%H:%M %Z").Output()
-		return string(bytes.TrimSpace(out))
-	}
-
-	return time.Now().Format("15:04")
-}
-
 func GetPath() string {
-	return path.Join(dir, fmt.Sprintf("tasks_%s.json", DateNow()))
+	return filepath.Join(dir, fmt.Sprintf("tasks_%s.json", DateNow()))
 }
 
 func GetAvailableDates() ([]string, error) {

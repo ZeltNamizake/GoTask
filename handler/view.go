@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path"
+	"path/filepath"
 )
 
 func ListTasksByDate(date string) error {
-	filePath := path.Join(dir, fmt.Sprintf("tasks_%s.json", date))
+	filePath := filepath.Join(dir, fmt.Sprintf("tasks_%s.json", date))
+
+	fmt.Println(filePath)
 
 	data, err := os.ReadFile(filePath)
 	if err != nil {
@@ -22,9 +24,13 @@ func ListTasksByDate(date string) error {
 
 	var tasks []Task
 	if len(data) == 0 {
-		if err := json.Unmarshal(data, &tasks); err != nil {
-			return err
-		}
+		ClearScreen()
+		fmt.Println("[INFO] - Empty file.")
+		return nil
+	}
+
+	if err := json.Unmarshal(data, &tasks); err != nil {
+		return err
 	}
 
 	ClearScreen()
@@ -39,9 +45,9 @@ func ListTasksByDate(date string) error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d. %s - %s%s\n", i+1, status, t.Title, timeInfo)
+		fmt.Printf("%d.  %s - %s%s\n", i+1, status, t.Title, timeInfo)
 	}
-	ShowScore()
+	ShowScoreByDate(date)
 	return nil
 
 }
@@ -62,14 +68,25 @@ func ListTasks() error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d. %s – %s%s\n", i+1, status, t.Title, timeInfo)
+		fmt.Printf("%d.  %s – %s%s\n", i+1, status, t.Title, timeInfo)
 	}
-	ShowScore()
+	ShowScoreNow()
 	return nil
 }
 
-func ShowScore() {
-	done, total := GetScore()
+func ShowScoreNow() {
+	done, total := GetScoreNow()
+
+	percent := 0
+	if total > 0 {
+		percent = (done * 100) / total
+	}
+	fmt.Printf("\nProgress: %d%%\n", percent)
+	fmt.Printf("Completed Task: %d / %d\n", done, total)
+}
+
+func ShowScoreByDate(date string) {
+	done, total := GetScoreByDate(date)
 
 	percent := 0
 	if total > 0 {
