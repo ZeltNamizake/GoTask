@@ -150,6 +150,7 @@ Select:
 - Output is designed for terminal readability and simplicity
 - Score is calculated based on completed tasks
 - Available dates are automatically detected from existing task files
+- TimeNow and DateNow are now cross-platform compatible (Windows, Linux, Android/Termux) with proper OS fallback handling
 ---
 
 ## 📜 License
