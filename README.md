@@ -121,8 +121,8 @@ Select:
 
    Tasks [2026-04-08]
    Number of tasks: 3
-   1. ✅️ – Learning (07:00) 
-   2. ✅️ – Reading (06:00)
+   1. ✅️ – Learning (07:00 WIB) 
+   2. ✅️ – Reading (06:00 WIB)
    3. ⬜️ – Workout
 
    Progress: 66%
