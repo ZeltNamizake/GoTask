@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -16,13 +17,17 @@ import (
 const dir = "taskFile"
 
 func DateNow() string {
-	out, _ := exec.Command("date", "+%F").Output()
-	return string(bytes.TrimSpace(out))
+	dateNow := time.Now().Format("2006-01-02")
+	return dateNow
 }
 
 func TimeNow() string {
-	out, _ := exec.Command("date", "+%H:%M").Output()
-	return string(bytes.TrimSpace(out))
+	if runtime.GOOS == "android" {
+		out, _ := exec.Command("date", "+%H:%M %Z").Output()
+		return string(bytes.TrimSpace(out))
+	}
+
+	return time.Now().Format("15:04")
 }
 
 func GetPath() string {
