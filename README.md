@@ -13,6 +13,7 @@ Designed for managing daily tasks quickly and efficiently using JSON-based stora
 - Delete tasks (`Delete Task`)
 - Edit done time on completed tasks (`Edit Done Time`)
 - Show tasks by specific date (`ListTasksByDate`)
+- Show available task dates (`Show Available Dates`)  
 - Display task completion score (Done / Total + Progress %)  
 - Automatically display all tasks on startup
 - Store tasks per day (`taskFile/tasks_YYYY-MM-DD.json`)
@@ -65,6 +66,7 @@ go run main.go
 4. Delete Task
 5. Edit Done Time
 6. Show Tasks by Date
+7. Show Available Dates
 0. Back/Exit
 Select:
 ```
@@ -114,6 +116,16 @@ Select:
    [INFO] - Press enter to continue...
    ```
 
+ - 📅 Show available dates:
+   ```plaintext
+   Available Dates:
+   1. 2026-04-08
+   2. 2026-04-10
+   3. 2026-04-12
+
+   [INFO] - Press enter to continue...
+   ```
+
 ---
 
 ## 📝 Notes
@@ -121,7 +133,8 @@ Select:
 - Input validation is enforced for all fields
 - The system uses 0 as a universal escape command
 - Output is designed for terminal readability and simplicity
-
+- Score is calculated based on completed tasks
+- Available dates are automatically detected from existing task files
 ---
 
 ## 📜 License
