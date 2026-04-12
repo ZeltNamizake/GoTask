@@ -1,7 +1,22 @@
 # GoTask ✅️
 
-GoTask is a simple **CLI task manager** built with Go.  
-Designed for managing daily tasks quickly and efficiently using JSON-based storage.
+GoTask is a lightweight CLI tool for tracking real task execution.
+
+Instead of managing plans, GoTask focuses on logging what you actually complete — along with timestamps — using simple JSON-based storage.
+
+---
+
+## 🧠 Philosophy
+
+GoTask is not a traditional todo list.
+
+It is designed to:
+- Track what you actually complete, not what you plan
+- Provide clear execution logs with timestamps
+- Keep the system minimal and distraction-free
+
+No backlog. No over-planning.
+Only real work that has been done.
 
 ---
 
