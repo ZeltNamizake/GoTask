@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	handler.EnsureTimezone()
+
 	if err := handler.InitStorage(); err != nil {
 		fmt.Println("InitStorage:", err)
 		return
