@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -26,6 +27,27 @@ func TimeNow() string {
 
 func GetPath() string {
 	return path.Join(dir, fmt.Sprintf("tasks_%s.json", DateNow()))
+}
+
+func GetAvailableDates() ([]string, error) {
+	files, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, err
+	}
+
+	var dates []string
+
+	for _, f := range files {
+		name := f.Name()
+
+		if strings.HasPrefix(name, "tasks_") && strings.HasSuffix(name, ".json") {
+			date := strings.TrimSuffix(strings.TrimPrefix(name, "tasks_"), ".json")
+			dates = append(dates, date)
+		}
+	}
+
+	sort.Strings(dates)
+	return dates, nil
 }
 
 func Ask(text string) string {

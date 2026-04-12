@@ -168,3 +168,4 @@ func GetScore() (int, int) {
 
 	return done, total
 }
+

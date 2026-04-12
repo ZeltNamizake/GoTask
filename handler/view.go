@@ -78,3 +78,22 @@ func ShowScore() {
 	fmt.Printf("\nProgress: %d%%\n", percent)
 	fmt.Printf("Completed Task: %d / %d\n", done, total)
 }
+
+func ShowAvailableDates() error {
+	dates, err := GetAvailableDates()
+	if err != nil {
+		return err
+	}
+
+	if len(dates) == 0 {
+		fmt.Println("[INFO] - No task dates found")
+		return nil
+	}
+
+	fmt.Println("Available Dates:")
+	for i, date := range dates {
+		fmt.Printf("%d. %s\n", i+1, date)
+	}
+	return nil
+
+}
