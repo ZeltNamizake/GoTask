@@ -48,6 +48,8 @@ GoTask/
 │   ├── util.go          # Helpers (input, time, clear screen)
 │   ├── view.go          # UI rendering (task display)
 │   └── task.go          # Task struct
+├── config/              # Configuration (auto-generated)
+│   └── timezone.json    # User timezone setting (first-run setup)
 └── taskFile/            # JSON storage (auto-generated)
 ```
 
@@ -121,8 +123,8 @@ Select:
 
    Tasks [2026-04-08]
    Number of tasks: 3
-   1. ✅️ – Learning (07:00 WIB) 
-   2. ✅️ – Reading (06:00 WIB)
+   1. ✅️ – Learning (07:00) 
+   2. ✅️ – Reading (06:00)
    3. ⬜️ – Workout
 
    Progress: 66%
@@ -150,7 +152,8 @@ Select:
 - Output is designed for terminal readability and simplicity
 - Score is calculated based on completed tasks
 - Available dates are automatically detected from existing task files
-- TimeNow and DateNow are now cross-platform compatible (Windows, Linux, Android/Termux) with proper OS fallback handling
+- Time handling is now consistent across platforms using a custom internal time engine with timezone support (`config/timezone.json`)
+
 ---
 
 ## 📜 License
