@@ -65,7 +65,7 @@ go mod tidy
 go run main.go
 ```
 
-> The taskFile folder will be created automatically when running for the first time, along with an empty JSON file
+> The `taskFile` folder is automatically created on first run and is used as the primary storage for all task data, separated by date in JSON format.
 
 ---
 
@@ -152,7 +152,7 @@ Select:
 - Output is designed for terminal readability and simplicity
 - Score is calculated based on completed tasks
 - Available dates are automatically detected from existing task files
-- Time handling is now consistent across platforms using a custom internal time engine with timezone support (`config/timezone.json`)
+- Time handling is consistent across platforms using timezone configuration (`config/timezone.json`).
 
 ---
 
