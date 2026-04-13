@@ -27,6 +27,7 @@ Only real work that has been done.
 - Mark tasks as not done (`Undone Task`)
 - Delete tasks (`Delete Task`)
 - Edit done time on completed tasks (`Edit Done Time`)
+- Edit start time on task started (`Edit Start Time`)
 - Edit the task title (`Edit Title Task`)
 - Show tasks by specific date (`ListTasksByDate`)
 - Show available task dates (`Show Available Dates`)  
@@ -46,8 +47,9 @@ GoTask/
 ├── go.mod
 ├── handler/
 │   ├── service.go       # Business logic (CRUD, storage)
-│   ├── util.go          # Helpers (input, time, clear screen)
+│   ├── util.go          # Helpers (input, score/progress, clear screen)
 │   ├── view.go          # UI rendering (task display)
+│   ├── time_engine.go   # setup timezone (first-run setup)
 │   └── task.go          # Task struct
 ├── config/              # Configuration (auto-generated)
 │   └── timezone.json    # User timezone setting (first-run setup)
@@ -83,9 +85,10 @@ go run main.go
 3. Undone Task
 4. Delete Task
 5. Edit Done Time
-6. Edit Title Task
-7. Show Tasks by Date
-8. Show Available Dates
+6. Edit Start Time
+7. Edit Title Task
+8. Show Tasks by Date
+9. Show Available Dates
 0. Back/Exit
 Select:
 ```
@@ -118,6 +121,13 @@ Select:
    New Done Time (HH:MM): 08:00
    [INFO] - Done time updated: 08:00 ✅️
    ```
+ - 🕑 Time editing on task started:
+   ```plaintext
+   Task Number: 1
+   New Start Time (HH:MM): 07:00
+   [INFO] - Start time updated: 07:00 ✅️
+   ```
+
  - ✏️ Change the task title:
    ```plaintext
    Task Number: 1
@@ -131,9 +141,9 @@ Select:
 
    📅 Tasks [2026-04-08]
    Number of tasks: 3
-   1. ✅️ – Learning (07:00) 
-   2. ✅️ – Reading (06:00)
-   3. ⬜️ – Workout
+   1. ✅️ – Learning (07:00 - 08:00) 
+   2. ✅️ – Reading (05:00 - 06:00)
+   3. ⬜️ – Workout (09:00)
 
    Progress: 66%
    Completed Task: 2 / 3
@@ -143,7 +153,7 @@ Select:
 
  - 📅 Show available dates:
    ```plaintext
-   Available Dates:
+   📆 Available Dates:
    1. 2026-04-08
    2. 2026-04-10
    3. 2026-04-12

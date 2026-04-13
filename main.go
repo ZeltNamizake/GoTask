@@ -20,9 +20,10 @@ func main() {
 3. Undone Task
 4. Delete Task
 5. Edit Done Time
-6. Edit Title Task
-7. Show Tasks by Date
-8. Show Available Dates
+6. Edit Start Time
+7. Edit Title Task
+8. Show Tasks by Date
+9. Show Available Dates
 0. Back/Exit
 Select: `
 
@@ -124,6 +125,31 @@ Select: `
 				continue
 			}
 
+			input, ok := handler.AskRequired("New Start Time: ")
+			if !ok {
+				fmt.Println("[INFO] - Cancelled")
+				continue
+			}
+
+			time, err := handler.ValidateTime(input)
+			if err != nil {
+				fmt.Println("[ERR] -", err)
+				continue
+			}
+
+			if err := handler.EditStartTime(index, time); err != nil {
+				fmt.Println("[ERR] - EditStartTime:", err)
+			} else {
+				fmt.Println("[INFO] - Start time updated:", time, "✅️")
+			}
+
+		case "7":
+			index, ok := handler.AskIntRequired("Task Number: ")
+			if !ok {
+				fmt.Println("[INFO] - Cancelled")
+				continue
+			}
+
 			input, ok := handler.AskRequired("New Title: ")
 			if !ok {
 				fmt.Println("[INFO] - Cancelled")
@@ -136,7 +162,7 @@ Select: `
 				fmt.Println("[INFO] - Edit task title successfully ✅️")
 			}
 
-		case "7":
+		case "8":
 			date, ok := handler.AskRequired("Date (YYYY-MM-DD): ")
 			if !ok {
 				fmt.Println("[INFO] - Cancelled")
@@ -149,7 +175,7 @@ Select: `
 				handler.Ask("\n[INFO] - Press enter to continue...")
 			}
 
-		case "8":
+		case "9":
 			handler.ClearScreen()
 			if err := handler.ShowAvailableDates(); err != nil {
 				fmt.Println("[ERR] - ShowAvailableDates:", err)

@@ -152,6 +152,21 @@ func EditDoneTime(index int, newTime string) error {
 	return SaveTasks(tasks)
 }
 
+func EditStartTime(index int, newTime string) error {
+	tasks, err := LoadTasks()
+	if err != nil {
+		return err
+	}
+
+	if index < 1 || index > len(tasks) {
+		return fmt.Errorf("Invalid index")
+	}
+
+	tasks[index-1].CreateAt = newTime
+
+	return SaveTasks(tasks)
+}
+
 func EditTitleTask(index int, newTitle string) error {
 	tasks, err := LoadTasks()
 	if err != nil {
