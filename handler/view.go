@@ -90,7 +90,7 @@ func ListTasks() error {
 
 		title := Truncate(t.Title, 40)
 		fmt.Printf("%-3d %-15s %-6s %s\n",
-			i+1, timeInfo, title, status)
+			i+1, timeInfo, status, title)
 	}
 
 	fmt.Println("────────────────────────────────────────────")

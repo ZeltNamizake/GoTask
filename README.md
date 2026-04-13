@@ -140,10 +140,13 @@ Select:
    Date (YYYY-MM-DD): 2026-04-08
 
    📅 Tasks [2026-04-08]
-   Number of tasks: 3
-   1. ✅️ – Learning (07:00 - 08:00) 
-   2. ✅️ – Reading (05:00 - 06:00)
-   3. ⬜️ – Workout (09:00)
+   ────────────────────────────────────────────
+   No  Time            Status Title
+   ────────────────────────────────────────────
+   1   07:00 - 08:00   ✅️     Learning
+   2   08:00 - 08:30   ✅️     Reading
+   3   09:00           ⬜️     Workout
+   ────────────────────────────────────────────
 
    Progress: 66%
    Completed Task: 2 / 3
@@ -153,11 +156,15 @@ Select:
 
  - 📅 Show available dates:
    ```plaintext
-   📆 Available Dates:
-   1. 2026-04-08
-   2. 2026-04-10
-   3. 2026-04-12
-
+   📅 Available Dates:
+   ───────────────────────
+   No   Date
+   ───────────────────────
+   1    2026-04-09
+   2    2026-04-10
+   3    2026-04-12
+   4    2026-04-14
+   ───────────────────────
    [INFO] - Press enter to continue...
    ```
 
