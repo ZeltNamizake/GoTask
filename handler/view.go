@@ -45,7 +45,8 @@ func ListTasksByDate(date string) error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d. %s - %s%s\n", i+1, status, t.Title, timeInfo)
+		index := fmt.Sprintf("%d.", i+1)
+		fmt.Printf("%-3s %s - %s%s\n", index, status, t.Title, timeInfo)
 	}
 	ShowScoreByDate(date)
 	return nil
@@ -68,7 +69,8 @@ func ListTasks() error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d. %s – %s%s\n", i+1, status, t.Title, timeInfo)
+		index := fmt.Sprintf("%d.", i+1)
+		fmt.Printf("%-3s %s – %s%s\n", index, status, t.Title, timeInfo)
 	}
 	ShowScoreNow()
 	return nil
