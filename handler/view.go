@@ -9,9 +9,6 @@ import (
 
 func ListTasksByDate(date string) error {
 	filePath := filepath.Join(dir, fmt.Sprintf("tasks_%s.json", date))
-
-	fmt.Println(filePath)
-
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -38,15 +35,17 @@ func ListTasksByDate(date string) error {
 	fmt.Println("Number of tasks:", len(tasks))
 	for i, t := range tasks {
 		status := "⬜️"
-		timeInfo := ""
+		timeInfo := fmt.Sprintf("(%s)", t.CreateAt)
 		if t.Done {
 			status = "✅️"
-			if t.DoneAt != "" {
-				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
+			if t.DoneAt != "" && t.CreateAt != "" {
+				timeInfo = fmt.Sprintf("(%s - %s)", t.CreateAt, t.DoneAt)
+			} else {
+				timeInfo = fmt.Sprintf("(%s)", t.DoneAt)
 			}
 		}
 		index := fmt.Sprintf("%d.", i+1)
-		fmt.Printf("%-3s %s - %s%s\n", index, status, t.Title, timeInfo)
+		fmt.Printf("%-3s %s - %s %s\n", index, status, t.Title, timeInfo)
 	}
 	ShowScoreByDate(date)
 	return nil
@@ -62,15 +61,17 @@ func ListTasks() error {
 	fmt.Println("Number of tasks:", len(tasks))
 	for i, t := range tasks {
 		status := "⬜️"
-		timeInfo := ""
+		timeInfo := fmt.Sprintf("(%s)", t.CreateAt)
 		if t.Done {
 			status = "✅️"
-			if t.DoneAt != "" {
-				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
+			if t.DoneAt != "" && t.CreateAt != "" {
+				timeInfo = fmt.Sprintf("(%s - %s)", t.CreateAt, t.DoneAt)
+			} else {
+				timeInfo = fmt.Sprintf("(%s)", t.DoneAt)
 			}
 		}
 		index := fmt.Sprintf("%d.", i+1)
-		fmt.Printf("%-3s %s – %s%s\n", index, status, t.Title, timeInfo)
+		fmt.Printf("%-3s %s – %s %s\n", index, status, t.Title, timeInfo)
 	}
 	ShowScoreNow()
 	return nil

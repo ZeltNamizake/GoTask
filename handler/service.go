@@ -70,8 +70,9 @@ func AddTask(title string) error {
 	}
 
 	tasks = append(tasks, Task{
-		Title: title,
-		Done:  false,
+		Title:    title,
+		Done:     false,
+		CreateAt: TimeNow(),
 	})
 
 	return SaveTasks(tasks)
