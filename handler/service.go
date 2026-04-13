@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
 )
 
 func InitStorage() error {
@@ -152,52 +151,17 @@ func EditDoneTime(index int, newTime string) error {
 	return SaveTasks(tasks)
 }
 
-func GetScoreNow() (int, int) {
+func EditTitleTask(index int, newTitle string) error {
 	tasks, err := LoadTasks()
 	if err != nil {
-		return 0, 0
+		return err
 	}
 
-	total := len(tasks)
-	done := 0
-
-	for _, t := range tasks {
-		if t.Done {
-			done++
-		}
+	if index < 1 || index > len(tasks) {
+		return fmt.Errorf("Invalid index")
 	}
 
-	return done, total
-}
+	tasks[index-1].Title = newTitle
 
-func GetScoreByDate(date string) (int, int) {
-	filePath := filepath.Join(dir, fmt.Sprintf("tasks_%s.json", date))
-
-	data, err := os.ReadFile(filePath)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return 0, 0
-		}
-		return 0, 0
-	}
-
-	var tasks []Task
-	if len(data) == 0 {
-		return 0, 0
-	}
-
-	if err := json.Unmarshal(data, &tasks); err != nil {
-		return 0, 0
-	}
-
-	total := len(tasks)
-	done := 0
-
-	for _, t := range tasks {
-		if t.Done {
-			done++
-		}
-	}
-	return done, total
-
+	return SaveTasks(tasks)
 }

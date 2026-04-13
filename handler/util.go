@@ -2,6 +2,7 @@ package handler
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -112,4 +113,54 @@ func ValidateTime(input string) (string, error) {
 func ClearScreen() {
 	time.Sleep(1 * time.Second)
 	fmt.Print("\033[H\033[2J")
+}
+
+func GetScoreByDate(date string) (int, int) {
+	filePath := filepath.Join(dir, fmt.Sprintf("tasks_%s.json", date))
+
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return 0, 0
+		}
+		return 0, 0
+	}
+
+	var tasks []Task
+	if len(data) == 0 {
+		return 0, 0
+	}
+
+	if err := json.Unmarshal(data, &tasks); err != nil {
+		return 0, 0
+	}
+
+	total := len(tasks)
+	done := 0
+
+	for _, t := range tasks {
+		if t.Done {
+			done++
+		}
+	}
+	return done, total
+
+}
+
+func GetScoreNow() (int, int) {
+	tasks, err := LoadTasks()
+	if err != nil {
+		return 0, 0
+	}
+
+	total := len(tasks)
+	done := 0
+
+	for _, t := range tasks {
+		if t.Done {
+			done++
+		}
+	}
+
+	return done, total
 }

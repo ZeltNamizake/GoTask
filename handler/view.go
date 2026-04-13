@@ -34,7 +34,7 @@ func ListTasksByDate(date string) error {
 	}
 
 	ClearScreen()
-	fmt.Printf("Tasks [%s]\n", date)
+	fmt.Printf("📅 Tasks [%s]\n", date)
 	fmt.Println("Number of tasks:", len(tasks))
 	for i, t := range tasks {
 		status := "⬜️"
@@ -45,7 +45,7 @@ func ListTasksByDate(date string) error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d.  %s - %s%s\n", i+1, status, t.Title, timeInfo)
+		fmt.Printf("%d. %s - %s%s\n", i+1, status, t.Title, timeInfo)
 	}
 	ShowScoreByDate(date)
 	return nil
@@ -57,7 +57,7 @@ func ListTasks() error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Tasks [%s]\n", DateNow())
+	fmt.Printf("📅 Tasks [%s]\n", DateNow())
 	fmt.Println("Number of tasks:", len(tasks))
 	for i, t := range tasks {
 		status := "⬜️"
@@ -68,7 +68,7 @@ func ListTasks() error {
 				timeInfo = fmt.Sprintf(" (%s)", t.DoneAt)
 			}
 		}
-		fmt.Printf("%d.  %s – %s%s\n", i+1, status, t.Title, timeInfo)
+		fmt.Printf("%d. %s – %s%s\n", i+1, status, t.Title, timeInfo)
 	}
 	ShowScoreNow()
 	return nil
@@ -107,7 +107,7 @@ func ShowAvailableDates() error {
 		return nil
 	}
 
-	fmt.Println("Available Dates:")
+	fmt.Println("📅 Available Dates:")
 	for i, date := range dates {
 		fmt.Printf("%d. %s\n", i+1, date)
 	}
