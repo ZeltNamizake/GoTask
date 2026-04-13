@@ -27,6 +27,7 @@ Only real work that has been done.
 - Mark tasks as not done (`Undone Task`)
 - Delete tasks (`Delete Task`)
 - Edit done time on completed tasks (`Edit Done Time`)
+- Edit the task title (`Edit Title Task`)
 - Show tasks by specific date (`ListTasksByDate`)
 - Show available task dates (`Show Available Dates`)  
 - Display task completion score (Done / Total + Progress %)  
@@ -116,12 +117,18 @@ Select:
    New Done Time (HH:MM): 08:00
    [INFO] - Done time updated: 08:00 ✅️
    ```
+ - ✏️ Change the task title:
+   ```plaintext
+   Task Number: 1
+   New Title: Learning
+   [INFO] - Edit task title successfully ✅️
+   ```
 
  - 📅 Display task list by date:
    ```plaintext
    Date (YYYY-MM-DD): 2026-04-08
 
-   Tasks [2026-04-08]
+   📅 Tasks [2026-04-08]
    Number of tasks: 3
    1. ✅️ – Learning (07:00) 
    2. ✅️ – Reading (06:00)
@@ -153,6 +160,7 @@ Select:
 - Score is calculated based on completed tasks
 - Available dates are automatically detected from existing task files
 - Time handling is consistent across platforms using timezone configuration (`config/timezone.json`).
+- The title of the task can be changed if you want to update it
 
 ---
 
