@@ -32,24 +32,34 @@ func ListTasksByDate(date string) error {
 
 	ClearScreen()
 	fmt.Printf("📅 Tasks [%s]\n", date)
-	fmt.Println("Number of tasks:", len(tasks))
+	fmt.Println("────────────────────────────────────────────")
+	fmt.Printf("%-3s %-15s %-6s %s\n", "No", "Time", "Status", "Title")
+	fmt.Println("────────────────────────────────────────────")
+
 	for i, t := range tasks {
 		status := "⬜️"
-		timeInfo := fmt.Sprintf("(%s)", t.CreateAt)
+		timeInfo := ""
+
+		if t.CreateAt != "" && t.DoneAt != "" {
+			timeInfo = fmt.Sprintf("%s - %s", t.CreateAt, t.DoneAt)
+		} else if t.DoneAt != "" {
+			timeInfo = t.DoneAt
+		} else if t.CreateAt != "" {
+			timeInfo = t.CreateAt
+		}
+
 		if t.Done {
 			status = "✅️"
-			if t.DoneAt != "" && t.CreateAt != "" {
-				timeInfo = fmt.Sprintf("(%s - %s)", t.CreateAt, t.DoneAt)
-			} else {
-				timeInfo = fmt.Sprintf("(%s)", t.DoneAt)
-			}
 		}
-		index := fmt.Sprintf("%d.", i+1)
-		fmt.Printf("%-3s %s - %s %s\n", index, status, t.Title, timeInfo)
+
+		title := Truncate(t.Title, 40)
+		fmt.Printf("%-3d %-15s %-6s %s\n",
+			i+1, timeInfo, status, title)
 	}
+
+	fmt.Println("────────────────────────────────────────────")
 	ShowScoreByDate(date)
 	return nil
-
 }
 
 func ListTasks() error {
@@ -58,21 +68,32 @@ func ListTasks() error {
 		return err
 	}
 	fmt.Printf("📅 Tasks [%s]\n", DateNow())
-	fmt.Println("Number of tasks:", len(tasks))
+	fmt.Println("────────────────────────────────────────────")
+	fmt.Printf("%-3s %-15s %-6s %s\n", "No", "Time", "Status", "Title")
+	fmt.Println("────────────────────────────────────────────")
+
 	for i, t := range tasks {
 		status := "⬜️"
-		timeInfo := fmt.Sprintf("(%s)", t.CreateAt)
+		timeInfo := ""
+
+		if t.CreateAt != "" && t.DoneAt != "" {
+			timeInfo = fmt.Sprintf("%s - %s", t.CreateAt, t.DoneAt)
+		} else if t.DoneAt != "" {
+			timeInfo = t.DoneAt
+		} else if t.CreateAt != "" {
+			timeInfo = t.CreateAt
+		}
+
 		if t.Done {
 			status = "✅️"
-			if t.DoneAt != "" && t.CreateAt != "" {
-				timeInfo = fmt.Sprintf("(%s - %s)", t.CreateAt, t.DoneAt)
-			} else {
-				timeInfo = fmt.Sprintf("(%s)", t.DoneAt)
-			}
 		}
-		index := fmt.Sprintf("%d.", i+1)
-		fmt.Printf("%-3s %s – %s %s\n", index, status, t.Title, timeInfo)
+
+		title := Truncate(t.Title, 40)
+		fmt.Printf("%-3d %-15s %-6s %s\n",
+			i+1, timeInfo, title, status)
 	}
+
+	fmt.Println("────────────────────────────────────────────")
 	ShowScoreNow()
 	return nil
 }
@@ -111,9 +132,22 @@ func ShowAvailableDates() error {
 	}
 
 	fmt.Println("📅 Available Dates:")
+	fmt.Println("───────────────────────")
+	fmt.Printf("%-4s %-5s", "No", "Date\n")
+	fmt.Println("───────────────────────")
+
 	for i, date := range dates {
-		fmt.Printf("%d. %s\n", i+1, date)
+		fmt.Printf("%-4d %-5s\n", i+1, date)
 	}
+
+	fmt.Println("───────────────────────")
 	return nil
 
+}
+
+func Truncate(s string, max int) string {
+	if len(s) > max {
+		return s[:max-1] + "..."
+	}
+	return s
 }

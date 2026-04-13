@@ -125,7 +125,7 @@ Select: `
 				continue
 			}
 
-			input, ok := handler.AskRequired("New Start Time: ")
+			input, ok := handler.AskRequired("New Start Time (HH:MM): ")
 			if !ok {
 				fmt.Println("[INFO] - Cancelled")
 				continue
