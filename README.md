@@ -83,8 +83,9 @@ go run main.go
 3. Undone Task
 4. Delete Task
 5. Edit Done Time
-6. Show Tasks by Date
-7. Show Available Dates
+6. Edit Title Task
+7. Show Tasks by Date
+8. Show Available Dates
 0. Back/Exit
 Select:
 ```
