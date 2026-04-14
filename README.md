@@ -1,8 +1,8 @@
 # GoTask ✅️
 
-GoTask is a lightweight CLI tool for tracking real task execution.
+GoTask is a terminal-based execution logger that records completed work with timestamps, not planned tasks.
 
-Instead of managing plans, GoTask focuses on logging what you actually complete — along with timestamps — using simple JSON-based storage.
+Instead of managing todos, GoTask logs actual work execution with timestamps using minimal JSON storage.
 
 ---
 
@@ -17,6 +17,16 @@ It is designed to:
 
 No backlog. No over-planning.
 Only real work that has been done.
+
+---
+
+## 🎯 Why GoTask Exists
+
+Most todo apps focus on planning and accumulation.
+
+GoTask focuses on execution tracking — what you actually did, not what you intended to do.
+
+It removes backlog pressure and keeps only real completed work.
 
 ---
 
@@ -49,7 +59,7 @@ GoTask/
 │   ├── service.go       # Business logic (CRUD, storage)
 │   ├── util.go          # Helpers (input, score/progress, clear screen)
 │   ├── view.go          # UI rendering (task display)
-│   ├── time_engine.go   # setup timezone (first-run setup)
+│   ├── time_engine.go   # Timezone system
 │   └── task.go          # Task struct
 ├── config/              # Configuration (auto-generated)
 │   └── timezone.json    # User timezone setting (first-run setup)
@@ -171,16 +181,25 @@ Select:
 ---
 
 ## 📝 Notes
-- Tasks are stored per day in separate JSON files: taskFile/tasks_YYYY-MM-DD.json
-- Input validation is enforced for all fields
-- The system uses 0 as a universal escape command
-- Output is designed for terminal readability and simplicity
-- Score is calculated based on completed tasks
-- Available dates are automatically detected from existing task files
-- Time handling is consistent across platforms using timezone configuration (`config/timezone.json`).
-- The title of the task can be changed if you want to update it
+
+### 📦 Data
+- Tasks are stored per day: `taskFile/tasks_YYYY-MM-DD.json`
+- Available dates are auto-detected from storage
+
+### ⏱ Time System
+- Timezone handled via `config/timezone.json`
+- Consistent timestamp format across platforms
+
+### ⚙️ Behavior
+- Input validation enforced for all fields
+- `0` acts as universal exit command
+- Score based on completed tasks
+
+### 🖥 Output
+- Designed for terminal readability
+- Optimized for small screens (Termux-friendly)
 
 ---
 
 ## 📜 License
-GoTask  is licensed under the MIT License. See the LICENSE file for more information.
+GoTask is licensed under the MIT License. See the LICENSE file for more information.
